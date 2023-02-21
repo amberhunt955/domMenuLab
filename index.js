@@ -1,3 +1,6 @@
+//& ----------------------------------------------
+//& Part 1
+
 // In the Intro to the DOM we selected, manipulated and created 
 // DOM elements - this lab provides practice doing the same.
 
@@ -54,9 +57,28 @@ var menuLinks = [
   // (3) Set the new element's content to the value of the text property of the "link" object.
   // (4) Append the new element to the topMenuEl element.
 
-  menuLinks.forEach( object => {
+  menuLinks.forEach( link => {
     const a = document.createElement("a");
-    a.setAttribute("href", object.href); 
-    a.textContent = object.text;
+    a.setAttribute("href", link.href); 
+    a.textContent = link.text;
     topMenuEl.appendChild(a);
 } )
+
+//& ----------------------------------------------
+//& Part 2
+
+// In the DOM Events lesson we saw how to run a function, i.e., 
+// an event listener, when an event, such as a click, was dispatched.
+
+// This lab continues where Part 1 left off and provides practice 
+// defining event listeners used to manipulate the DOM in response 
+// to user interaction. It also provides additional practice styling 
+// DOM elements dynamically using JavaScript.
+
+// Task 4.0 Select and cache the <nav id="sub-menu"> element in a variable named subMenuEl.
+
+// Task 4.1 Set the height subMenuEl element to be 100%.
+
+// Task 4.2 Set the background color of subMenuEl to the value stored in the --sub-menu-bgCSS custom property.
+
+// Task 4.3 Add the class of flex-around to the subMenuEl element.
