@@ -140,20 +140,20 @@ let showingSubMenu = false;
 // Set the showingSubMenu to false.
 // Set the CSS top property of subMenuEl to 0.
 // return to exit the handler.
-//! Completed I think
+//? Completed below
 
 // Task 5.4 Next, the event listener should remove a class name of active from each <a> element in
 // topMenuLinks- whether the active class exists or not. Hint: Removing a non-existent class from
 // an element does not cause an error, so just remove it!
-//! Completed I think
+//? Completed below
 
 // Task 5.5 Next, the event listener should add a class name of active to the <a> element that was clicked.
-//! Completed I think
+//? Completed below
 
 // Task 5.6 Set showingSubMenu to true if the clicked <a> element's "link" object within menuLinks has a
 // subLinks property (all do, except for the "link" object for ABOUT), otherwise, set it to false. Hint: Saving
 // the "link" object in a variable will come in handy for passing its subLinks array in Task 5.7
-//! Really not sure this works. And I haven't set a variable...
+//? Completed below
 
 // Progress Check - Clicking any of the links should make that link "active" and clear the others: (see pic).
 // Clicking an "active" link should clear that link.
@@ -161,51 +161,12 @@ let showingSubMenu = false;
 
 // Task 5.7 Next in the event listener... 
   // If showingSubMenu is true:
-    // Call a buildSubMenu function passing to it the subLinks array for the clicked <a> element.
-    // Set the CSS top property of subMenuEl to 100%.
+  // Call a buildSubMenu function passing to it the subLinks array for the clicked <a> element.
+  // Set the CSS top property of subMenuEl to 100%.
   // Otherwise (showingSubMenu is false):
-    // Set the CSS top property of subMenuEl to 0.
-
-topMenuEl.addEventListener("click", function(event) {
-  // Task 5.2
-  event.preventDefault();
-  if (event.target.localName !== "a") return;
-  console.log(event.target.textContent);
-  // Task 5.3
-  console.dir(event.target);
-  if (event.target.classList.contains("active")) {
-    event.target.classList.remove("active");
-    showingSubMenu = false;
-    subMenuEl.style.top = "0";
-    return;
-  }
-  // Task 5.4
-  topMenuLinks.forEach( (link) => {
-    link.classList.remove("active")
-  });
-  // Task 5.5
-  event.target.classList.add("active")
-  //& Task 5.6 -------------------------------------
-// if (link.subLinks)
-  if (event.target.hasAttribute("subLinks")) {
-    const link = event.target;
-    showingSubMenu = true;
-  } else {
-    showingSubMenu = false;
-  }
-  // Task 5.7 and 5.8
-  if (showingSubMenu === true) {
-    function buildSubMenu() {
-      event.target.subLinks;
-    }
-    subMenuEl.style.top = "100%";
-  } else {
-    subMenuEl.style.top = "0";
-  }
-})
-
-
-
+  // Set the CSS top property of subMenuEl to 0.
+//? Completed below
+  
 // Task 5.8 Code the buildSubMenu function so that it:
   // Clears the contents of subMenuEl.
   // Iterates over the subLinks array passed as an argument; and for each "link" object:
@@ -213,8 +174,68 @@ topMenuEl.addEventListener("click", function(event) {
     // On the new element, add an href attribute with its value set to the href property of the "link" object.
     // Set the new element's content to the value of the text property of the "link" object.
     // Append the new element to the subMenuEl element.
+//? Completed below
 
 // Progress Check - Take the menu for a test drive!
+//? Complete
+  
+topMenuEl.addEventListener("click", function(event) {
+  // Task 5.2
+  event.preventDefault();
+  if (event.target.localName !== "a") return;
+  console.log(event.target.textContent);
+
+  // Task 5.3
+  console.dir(event.target);
+
+  if (event.target.classList.contains("active")) {
+    event.target.classList.remove("active");
+    showingSubMenu = false;
+    subMenuEl.style.top = "0";
+    return;
+  }
+
+  // Task 5.4
+  topMenuLinks.forEach( (link) => {
+    link.classList.remove("active")
+  });
+
+  // Task 5.5
+  event.target.classList.add("active");
+
+  // Task 5.6
+  for (link of menuLinks) {
+
+    if (event.target.textContent == link.text && link.subLinks) {
+      showingSubMenu = true;
+      subLinksArray = link.subLinks;
+      break; 
+    } else {
+      showingSubMenu = false;
+      subLinksArray = undefined;
+    }
+  }
+
+  // Task 5.7
+  if (showingSubMenu === true) {
+    buildSubMenu(subLinksArray);
+    subMenuEl.style.top = "100%";
+  } else {
+    subMenuEl.style.top = "0";
+  }
+
+  // Task 5.8
+  function buildSubMenu(subMenuLinks) {
+    subMenuEl.textContent = "";
+    subMenuLinks.forEach( (link) => {
+      const a = document.createElement("a");
+      a.setAttribute("href", link.href);
+      a.textContent = link.text;
+      subMenuEl.appendChild(a);
+    });
+  }
+  
+})
 
 // Task 6.0 Attach a delegated 'click' event listener to subMenuEl. The first line of code of the 
 // event listener function should call the event object's preventDefault() method. The second line 
