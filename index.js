@@ -235,21 +235,49 @@ topMenuEl.addEventListener("click", function(event) {
     });
   }
   
+  // Task 6.4 
+  if (event.target.textContent === "about") {
+    mainEl.innerHTML = "<h1>about</h1>";
+  }
+
 })
+
 
 // Task 6.0 Attach a delegated 'click' event listener to subMenuEl. The first line of code of the 
 // event listener function should call the event object's preventDefault() method. The second line 
 // of code function should immediately return if the element clicked was not an <a> element.
 // console.log the content of the <a> to verify the handler is working.
+//? Completed below
 
 // Task 6.1 Next, the event listener should:
   // Set showingSubMenu to false.
   // Set the CSS top property of subMenuEl to 0.
+//? Completed below
 
 // Task 6.2 Remove the class name of active from each <a> element in topMenuLinks- whether 
 // the active class exists or not.
+//? Completed below
 
 // Task 6.3 Update the contents of mainEl to the contents of the <a> element, within an <h1>, 
 // clicked within subMenuEl.
+//? Completed below
 
 // Task 6.4 If the ABOUT link is clicked, an <h1>about</h1> should be displayed. Congrats!
+//? Completed above
+
+subMenuEl.addEventListener("click", function(event) {
+  // Task 6.0
+  event.preventDefault();
+  if (event.target.localName !== "a") return;
+  console.log(event.target.textContent);
+  // Task 6.1
+  showingSubMenu = false;
+  subMenuEl.style.top = "0";
+  // Task 6.2 
+  topMenuLinks.forEach( (link) => {
+    link.classList.remove("active");
+  })
+  // Task 6.3
+  mainEl.innerHTML = "<h1>" + event.target.textContent + "</h1>";
+
+})
